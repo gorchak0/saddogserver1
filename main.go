@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// 123
 func main() {
 	// Обработчик для главной страницы
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
