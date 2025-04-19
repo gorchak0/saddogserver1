@@ -11,7 +11,7 @@ func main() {
 	// Обработчик для главной страницы
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		currentTime := time.Now().Format("2006-01-02 15:04:05")
-		fmt.Fprintf(w, "Текущее время сервера13: %s", currentTime)
+		fmt.Fprintf(w, "Время сервера: %s", currentTime)
 	})
 
 	// Обработчик для вебхука
