@@ -16,6 +16,7 @@ func main() {
 
 	// Обработчик для вебхука
 	http.HandleFunc("/update", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Получен запрос от GitHub на /update") // <-- добавили лог
 		// Запуск скрипта для обновления
 		cmd := exec.Command("cmd", "/C", "H:\\saddogserver1\\deploy.bat")
 		err := cmd.Run()
