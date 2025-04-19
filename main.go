@@ -17,14 +17,17 @@ func main() {
 
 	// Обработчик для вебхука
 	http.HandleFunc("/update", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("Получен запрос от GitHub на /update") // <-- добавили лог
-		// Запуск скрипта для обновления
-		cmd := exec.Command("cmd", "/C", "H:\\saddogserver1\\deploy.bat")
-		err := cmd.Run()
+		fmt.Println("Получен запрос от GitHub на /update")
+
+		cmd := exec.Command("cmd", "/C", "H:\\deploy.bat")
+		output, err := cmd.CombinedOutput()
+
 		if err != nil {
+			fmt.Printf("Ошибка при выполнении: %s\nВывод скрипта:\n%s\n", err.Error(), string(output))
 			http.Error(w, "Ошибка при выполнении скрипта обновления", http.StatusInternalServerError)
 			return
 		}
+
 		fmt.Fprintln(w, "Обновление выполнено успешно!")
 	})
 
