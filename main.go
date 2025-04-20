@@ -67,6 +67,9 @@ func main() {
 		fmt.Fprintln(w, "Обновление выполнено успешно!")
 	})
 
+	// Раздача HLS видео-файлов
+	http.Handle("/hls/", http.StripPrefix("/hls/", http.FileServer(http.Dir("C:/hls"))))
+
 	// Добавляем пользователя из консоли в базу данных
 	fmt.Print("Введите имя пользователя: ")
 	var name string
