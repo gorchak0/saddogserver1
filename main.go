@@ -68,7 +68,7 @@ func main() {
 	})
 
 	// Раздача HLS видео-файлов
-	http.Handle("/hls/", http.StripPrefix("/hls/", http.FileServer(http.Dir("C:/hls"))))
+	http.Handle("/hls/", http.StripPrefix("/hls/", http.FileServer(http.Dir("H:/hls"))))
 
 	// Добавляем пользователя из консоли в базу данных
 	fmt.Print("Введите имя пользователя: ")
