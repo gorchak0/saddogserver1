@@ -68,22 +68,26 @@ func main() {
 	})
 
 	// Раздача HLS видео-файлов
-	http.Handle("/hls/", http.StripPrefix("/hls/", http.FileServer(http.Dir("H:/hls"))))
+	//http.Handle("/hls/", http.StripPrefix("/hls/", http.FileServer(http.Dir("H:/hls"))))
 
 	http.Handle("/video.html", http.FileServer(http.Dir(".")))
 
+	adduser(db)
+
+	// Запуск сервера
+	fmt.Println("Сервер запущен на порту 80")
+	http.ListenAndServe(":80", nil)
+}
+
+func adduser(db *sql.DB) {
 	// Добавляем пользователя из консоли в базу данных
 	fmt.Print("Введите имя пользователя: ")
 	var name string
 	fmt.Scanln(&name)
 
 	// Вставляем имя в базу данных
-	_, err = db.Exec("INSERT INTO users (name) VALUES (?)", name)
+	_, err := db.Exec("INSERT INTO users (name) VALUES (?)", name)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Запуск сервера
-	fmt.Println("Сервер запущен на порту 80")
-	http.ListenAndServe(":80", nil)
 }
