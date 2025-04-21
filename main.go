@@ -81,7 +81,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Запуск сервера 123
+	// Запуск сервера
 	fmt.Println("Сервер запущен на порту 80")
 	http.ListenAndServe(":80", nil)
 }
