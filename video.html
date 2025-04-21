@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Камера онлайн</title>
+		<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+	</head>
+	<body>
+		<video
+			id="video"
+			controls
+			autoplay
+			style="width: 100%; max-width: 800px"
+		></video>
+
+		<script>
+			const video = document.getElementById('video')
+			const videoSrc = '/hls/stream.m3u8'
+
+			if (Hls.isSupported()) {
+				const hls = new Hls()
+				hls.loadSource(videoSrc)
+				hls.attachMedia(video)
+				hls.on(Hls.Events.MANIFEST_PARSED, function () {
+					video.play()
+				})
+			} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+				video.src = videoSrc
+				video.addEventListener('loadedmetadata', function () {
+					video.play()
+				})
+			} else {
+				alert('Ваш браузер не поддерживает HLS.')
+			}
+		</script>
+	</body>
+</html>
